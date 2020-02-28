@@ -1,9 +1,6 @@
 import Axios, { AxiosResponse } from 'axios'
 import AppId from '../appId/AppId'
-
-import {
-  WeatherData
-} from '../Interfaces/WeatherData'
+import { WeatherData } from '../interfaces/WeatherData'
 
 const baseURL: string = 'https://api.openweathermap.org/data/2.5/weather'
 
