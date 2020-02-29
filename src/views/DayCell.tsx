@@ -31,7 +31,7 @@ export default class DayCell extends React.Component<any, any> {
   private getLabelView = (key: number) => {
     return (
       <View key={key} style={styles.labelContainer}>
-        <Text style={styles.label}>{'Day'}</Text>
+        <Text style={styles.dayLabel}>{'Day'}</Text>
         <Text style={styles.label}>{'Weather'}</Text>
         <Text style={styles.label}>{'High'}</Text>
         <Text style={styles.label}>{'Low'}</Text>
@@ -50,12 +50,18 @@ const styles = StyleSheet.create({
     flex: 1
   },
   allLabelContainer: {
-    flex: 5,
+    flex: 6,
     marginTop: getTheme().marginSixteen
   },
   labelContainer: {
     flex: 1,
-    flexDirection: 'row',
+    marginTop: getTheme().marginEight,
+    marginBottom: getTheme().marginEight,
+    flexDirection: 'row'
+  },
+  dayLabel: {
+    flex: 1,
+    textAlign: 'left'
   },
   label: {
     flex: 1,
