@@ -1,7 +1,8 @@
 import React from 'react'
 import DayCell from './DayCell'
 import HeaderCell from './HeaderCell'
-import CurrentCell from './CurrentCell'
+import { getTheme } from '../utilities/Theme'
+import { WeatherData } from '../interfaces/WeatherData'
 import NetworkingService from '../services/NetworkingService'
 import {
   View,
@@ -10,10 +11,21 @@ import {
   Dimensions
 } from 'react-native'
 
-export default class WeatherView extends React.Component<any, any> {
+interface WeatherViewState {
+  weatherData: WeatherData[]
+}
+
+export default class WeatherView extends React.Component<any, WeatherViewState> {
+
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      weatherData: []
+    }
+  }
 
   async componentDidMount() {
-    // NetworkingService.fetchWeatherData()
+    await this.fetchData()
   }
 
   public render() {
@@ -21,7 +33,7 @@ export default class WeatherView extends React.Component<any, any> {
       <View style={styles.flatListContainer}>
         <FlatList
           style={styles.flatList}
-          data={[1, 2, 3]}
+          data={this.state.weatherData}
           renderItem={this.cellForItem}
           // Find different UUID
           keyExtractor={(item: any) => { return JSON.stringify(item)}} />
@@ -29,22 +41,27 @@ export default class WeatherView extends React.Component<any, any> {
     )
   }
 
-  private cellForItem = (item: { item: any, index: number }) => {
-    if (item.item === 1) {
+  /**
+   * Return the correct FlatList cell based on the item's index.
+   */
+  private cellForItem = (item: { item: WeatherData, index: number }) => {
+    if (item.index === 0) {
       return (
-        <HeaderCell />
+        <HeaderCell weatherData={item.item} />
       )  
     }
 
-    if (item.item === 2) {
-      return (
-        <CurrentCell />
-      )
-    }
-
     return (
-      <DayCell />
+      <DayCell weatherData={item.item} />
     )
+  }
+
+  /**
+   * Fetch the weather data and refresh the component's state.
+   */
+  private fetchData = async () => {
+    const data: WeatherData[] = await NetworkingService.fetchWeatherData()
+    return this.setState({ weatherData: data })
   }
 
 }
@@ -52,6 +69,7 @@ export default class WeatherView extends React.Component<any, any> {
 const styles = StyleSheet.create({
   flatListContainer: {
     flex: 1,
+    paddingBottom: getTheme().marginThirtyTwo,
     backgroundColor: '#81d1e6'
   },
   flatList: {
