@@ -40,3 +40,55 @@ describe('convertKelvinToFahrenheit', () => {
   })
 
 })
+
+describe('formatTimeStamp', () => {
+  it('Sample Date - 12/31/2019', () => {
+    const timestamp: number = 1577837900
+    const expected: string = '12/31/2019'
+
+    const output: string = Utilities.formatTimeStamp(timestamp)
+    expect(output).toEqual(expected)
+  })
+
+  it('Sample Date - 3/2/2020', () => {
+    const timestamp: number = 1583176090
+    const expected: string = '3/2/2020'
+
+    const output: string = Utilities.formatTimeStamp(timestamp)
+    expect(output).toEqual(expected)
+  })
+
+  it('Sample Date - 10/28/2000', () => {
+    const timestamp: number = 972760090
+    const expected: string = '10/28/2000'
+
+    const output: string = Utilities.formatTimeStamp(timestamp)
+    expect(output).toEqual(expected)
+  })
+})
+
+describe('getDayOfTheWeek', () => {
+  it('Day of the week - Tuesday', () => {
+    const timestamp: number = 1577837900
+    const expected: string = 'Tuesday'
+
+    const output: string = Utilities.getDayOfTheWeek(timestamp)
+    expect(output).toEqual(expected)
+  })
+
+  it('Day of the week - Monday', () => {
+    const timestamp: number = 1583176090
+    const expected: string = 'Monday'
+
+    const output: string = Utilities.getDayOfTheWeek(timestamp)
+    expect(output).toEqual(expected)
+  })
+
+  it('Day of the week - Saturday', () => {
+    const timestamp: number = 972760090
+    const expected: string = 'Saturday'
+
+    const output: string = Utilities.getDayOfTheWeek(timestamp)
+    expect(output).toEqual(expected)
+  })
+})

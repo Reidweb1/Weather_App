@@ -21,6 +21,7 @@ export default class HeaderCell extends React.Component<HeaderCellProps, any> {
     const current: string = Utilities.convertKelvinToFahrenheit(tempObject.temp, 0)
     const high: string = Utilities.convertKelvinToFahrenheit(tempObject.temp_max, 0)
     const low: string = Utilities.convertKelvinToFahrenheit(tempObject.temp_min, 0)
+    const day: string = Utilities.getDayOfTheWeek(this.props.weatherData.dt)
     return (
       <View style={styles.container}>
         <Text style={styles.locationText}>{'Seattle'}</Text>
@@ -29,7 +30,7 @@ export default class HeaderCell extends React.Component<HeaderCellProps, any> {
         <View style={styles.dayContainer}>
           <View style={styles.spacer}/>
           <View style={styles.todayContainer}>
-            <Text style={styles.todayText}>{'Friday - Today'}</Text>
+            <Text style={styles.todayText}>{`${day} - Today`}</Text>
           </View>
           <View style={styles.degreeContainer}>
             <Text style={styles.smallDegreeText}>{`High - ${high}°`}</Text>

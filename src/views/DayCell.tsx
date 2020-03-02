@@ -19,12 +19,13 @@ export default class DayCell extends React.Component<DayCellProps, any> {
     const tempObject: Main = this.props.weatherData.main
     const high: string = Utilities.convertKelvinToFahrenheit(tempObject.temp_max, 0)
     const low: string = Utilities.convertKelvinToFahrenheit(tempObject.temp_min, 0)
+    const dateString: string = Utilities.formatTimeStamp(this.props.weatherData.dt)
     return (
       <View style={styles.container}>
         <View style={styles.spacer}/>
         <View style={styles.allLabelContainer}>
         <View style={styles.labelContainer}>
-          <Text style={styles.dayLabel}>{'Day'}</Text>
+          <Text style={styles.dayLabel}>{dateString}</Text>
           <Text style={styles.label}>{weatherObject.main}</Text>
           <Text style={styles.label}>{`High - ${high}°`}</Text>
           <Text style={styles.label}>{`Low - ${low}°`}</Text>
