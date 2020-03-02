@@ -21,21 +21,20 @@ export default class HeaderCell extends React.Component<HeaderCellProps, any> {
     const current: string = Utilities.convertKelvinToFahrenheit(tempObject.temp, 0)
     const high: string = Utilities.convertKelvinToFahrenheit(tempObject.temp_max, 0)
     const low: string = Utilities.convertKelvinToFahrenheit(tempObject.temp_min, 0)
+    const day: string = Utilities.getDayOfTheWeek(this.props.weatherData.dt)
     return (
       <View style={styles.container}>
         <Text style={styles.locationText}>{'Seattle'}</Text>
         <Text style={styles.weatherText}>{weatherObject.main}</Text>
         <Text style={styles.degreeText}>{`${current}°`}</Text>
         <View style={styles.dayContainer}>
-          <View style={styles.spacer}/>
           <View style={styles.todayContainer}>
-            <Text style={styles.todayText}>{'Friday - Today'}</Text>
+            <Text style={styles.todayText}>{`${day} - Today`}</Text>
           </View>
           <View style={styles.degreeContainer}>
             <Text style={styles.smallDegreeText}>{`High - ${high}°`}</Text>
             <Text style={styles.smallDegreeText}>{`Low - ${low}°`}</Text>
           </View>
-          <View style={styles.spacer}/>
         </View>
       </View>
     )
@@ -79,16 +78,17 @@ const styles = StyleSheet.create({
     flex: 1
   },
   todayContainer: {
-    flex: 3,
+    flex: 4,
     alignContent: 'center',
     justifyContent: 'center'
   },
   todayText: {
     fontSize: getTheme().fontSize20,
-    textAlign: 'left'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   degreeContainer: {
-    flex: 3,
+    flex: 4,
     alignContent: 'center',
     justifyContent: 'center'
   },

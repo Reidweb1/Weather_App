@@ -29,6 +29,8 @@ export default class NetworkService {
    */
   public static fetchWeatherData = (): Promise<WeatherData[]> => {
     const url: string = `${baseURL}`
+
+    // Param is currently hard-coded to find weather for Seattle.
     const params: WeatherParams = {
       appid: AppId,
       id: 5809844
