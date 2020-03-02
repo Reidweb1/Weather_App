@@ -22,7 +22,7 @@ export default class Utilities {
    */
   public static formatTimeStamp = (timestamp: number): string => {
     const date: Date = new Date(timestamp * 1000)
-    return ((date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear())
+    return ((date.getMonth()+1) + '/' + date.getDate() + `- ${weekdays[date.getDay()]}`)
   }
 
   /**

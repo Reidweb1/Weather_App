@@ -1,7 +1,6 @@
 import React from 'react'
 import DayCell from './DayCell'
 import HeaderCell from './HeaderCell'
-import { getTheme } from '../utilities/Theme'
 import { WeatherData } from '../interfaces/WeatherData'
 import NetworkingService from '../services/NetworkingService'
 import {
@@ -17,6 +16,9 @@ interface WeatherViewState {
 
 export default class WeatherView extends React.Component<any, WeatherViewState> {
 
+  /**
+   * Set the default state for the component.
+   */
   constructor(props: any) {
     super(props)
     this.state = {
@@ -24,6 +26,9 @@ export default class WeatherView extends React.Component<any, WeatherViewState> 
     }
   }
 
+  /**
+   * Fetch the Weather Data and refresh the component's state.
+   */
   async componentDidMount() {
     await this.fetchData()
   }
@@ -35,7 +40,6 @@ export default class WeatherView extends React.Component<any, WeatherViewState> 
           style={styles.flatList}
           data={this.state.weatherData}
           renderItem={this.cellForItem}
-          // Find different UUID
           keyExtractor={(item: any) => { return JSON.stringify(item)}} />
       </View>
     )
@@ -51,8 +55,9 @@ export default class WeatherView extends React.Component<any, WeatherViewState> 
       )  
     }
 
+    const isBottomCell: boolean = (item.index === this.state.weatherData.length -1) ? true : false
     return (
-      <DayCell weatherData={item.item} />
+      <DayCell weatherData={item.item} isBottomCell={isBottomCell} />
     )
   }
 
@@ -69,7 +74,6 @@ export default class WeatherView extends React.Component<any, WeatherViewState> 
 const styles = StyleSheet.create({
   flatListContainer: {
     flex: 1,
-    paddingBottom: getTheme().marginThirtyTwo,
     backgroundColor: '#81d1e6'
   },
   flatList: {
